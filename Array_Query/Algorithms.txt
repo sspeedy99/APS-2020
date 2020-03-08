@@ -1,0 +1,43 @@
+------------------------------All array query algorithms-----------------------------------------
+
+1. Kadane's Algorithm:
+
+- Use to perform of subarry ops(eg max, min), performs sliding window technique.
+- Efficeiny of O(n)
+
+
+2. Segment Tree:
+
+- Bottom up tree.
+- Efficieny: Tree creation O(n), Height of tree logn, Query O(logn), Update O(logn).
+- Updation is valid, but insertion and deletion is not allowed.
+
+
+3. Lookup Table:
+
+- Size depends on the nature of the problem, but the query time must be O(1).
+
+4. Sparse Table:
+
+- Space efficiency O(nlogn)
+- Query time constant time O(1).
+- Preprocessing time O(nlogn).
+
+5. Square root decomposition(MO's Algorithm):
+
+- Space efficeny O(sqrt(N))
+- Processing time O(sqrt(N))
+- Query time O(3*sqrt(N))
+- Only works for offline algorithm (Query must be know beforehand)
+
+6. Fenwick Tree:
+
+- Space efficency O(n)
+- Processing time O(logn)
+- Query time O(logn)
+
+7. Merge-Sort Tree - 
+
+8. Treaps -
+
+9. Presistent Segment Tree - 
