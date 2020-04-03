@@ -1,5 +1,4 @@
-// Miller-Rabin Algorithm for primality test (For long long integers) //
-//Spoj Question - PON// 
+// Seive of Eratothenes - Finding Prime numbers //
 
 
 #include <bits/stdc++.h>
@@ -22,7 +21,23 @@ using ll = long long;
 
 
 
-const int N=1e5+5;
+const int N=1e6+5;
+
+int is_prime[N+1];
+
+void Seive() {
+    repi(i,1,N)
+        is_prime[i] = 1;
+    is_prime[0] = is_prime[1] = 0;
+
+    for(int i=2; i*i<=N; i++) {
+        if(is_prime[i]) {
+            for(int j= i*i; j<=N; j+=i)
+                is_prime[j] = 0
+        }
+    }
+}
+
 
 
 int32_t main()
@@ -32,7 +47,7 @@ int32_t main()
 	cin>>t;
 	while(t--){
 		cin>>n;
-		isPrime(n)?cout<<"YES"<<endl:cout<<"NO"<<endl;
+		isPrime(n)?cout<<"yes"<<endl:cout<<"no"<<endl;
 	}
 
 	return 0;
