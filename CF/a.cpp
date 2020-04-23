@@ -17,48 +17,34 @@ using vi = vector <int> ;
 #define repi(i, x, n) for (auto i = x; i <= n; ++i)
 
 
-const ll N = 1e5+8;
-
-int solve(int n, int k) 
-{ 
-    vi P;  
-    while (n%2 == 0) 
-    { 
-        P.pb(2); 
-        n /= 2; 
-    } 
-    for (int i=3; i*i<=n; i=i+2) 
-    { 
-        while (n%i == 0) 
-        { 
-            n = n/i; 
-            P.pb(i); 
-        } 
-    } 
-
-    if (n > 2) 
-        P.pb(n); 
-
-    if (sz(P) < k) 
-    {  
-        return 0; 
-    } 
-
-    return 1;
-
-} 
-
-
 
 int32_t main()
 {
 	IOS;
-    int q,x,k;
-    cin>>q;
-    while(q--){
-        cin>>x>>k;
-        cout<<solve(x,k)<<endl;
+    int t,n;
+    cin>>t;
+    multimap<int, int> m; 
+    multimap<int ,int >:: iterator it;
+    while(t--){
+        cin>>n;
+        vi arr(n);
+        rep(i,n) cin>>arr[i];
+        rep(i,n)
+            m.insert(make_pair(abs(arr[i]-arr[i+1]),arr[i]));
+        m.insert(make_pair(abs(arr[0]-arr[n-1]),arr[n-1]));
+        int i = 0; 
+        for (it = m.begin(); it != m.end(); it++) 
+            arr[i++] = (*it).second ; 
+        for (int i = 0 ; i < n; i++) 
+            cout << arr[i] << " ";
+        m.clear();
+        cout<<endl;
     }
-
+        
 	return 0;
 }
+
+
+ 
+
+ 
