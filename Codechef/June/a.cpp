@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
-using vi = vector <int> ;
+using vi = vector<int>;
 
 #define IOS ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
 #define endl "\n"
-#define ll long long
 #define mp make_pair
 #define pb push_back
+#define ll long long
 #define fi first
 #define se second
 #define sz(x) (int)((x).size())
@@ -17,38 +17,30 @@ using vi = vector <int> ;
 #define repi(i, x, n) for (auto i = x; i <= n; ++i)
 
 
-const ll N = 87000008;
-vi primes;
-
-void solve() {
-	vector <bool> is_prime(N, true);
-	is_prime[0] = is_prime[1] = false;
-
-	for(ll i=2; i*i<=N; i++) {
-        if(is_prime[i]) {
-            for(ll j= i*i; j<=N; j+=i)
-                is_prime[j] = false;
-        }
-    }
-
-    for(ll i=2; i<=N; ++i)
-        if(is_prime[i])
-            primes.pb(i);
-
-
-
-}
+const int N=1e5+5;
 
 int32_t main()
 {
 	IOS;
-    solve();
-    int q,n;
-    cin>>q;
-    while(q--){
-        cin>>n;
-        cout<<primes[n-1]<<endl;;
-    }
+	int t,n,k;
+	cin>>t;
+	while(t--){
+		int sum =0,rev = 0;
+		cin>>n>>k;
+		vi inp(n);
+		rep(i,n){
+			cin>>inp[i];
+			sum += inp[i];
+		}
+		rep(i,n){
+			if (inp[i] > k)
+				inp[i] = k;
+			rev += inp[i];
+		}
+
+		cout<<(sum-rev)<<endl;
+	}
+
 
 	return 0;
 }

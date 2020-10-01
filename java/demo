@@ -1,0 +1,3 @@
+select count(courseid) coursename
+from student st courses co
+where profesor.profid = coursesofferd.profid and courses.courseid = coursesofferd.courseid group by coursename;
