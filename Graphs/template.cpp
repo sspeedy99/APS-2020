@@ -35,6 +35,17 @@ typedef tree<int, null_type,
  
 const int N=1e6+5;
 const int mod = 1e9+7;
+
+vector<vector<bool>> vis;
+vector<pair<int, int>> moves = {{-1,0},{1,0},{0,-1},{0,1}};
+int n,m,res;
+
+//helper function - to check if a particular cell is not out of bounds
+bool isValid(int x, int y){
+    if(x < 0 || x>=n || y< 0 || y >= m ) return false;
+    if (vis[x][y]) return false;
+    return true;
+}
  
 int main()
 {
@@ -45,6 +56,5 @@ int main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
-	ll n,m,x,y
     return 0;
 }

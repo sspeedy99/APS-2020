@@ -35,6 +35,35 @@ typedef tree<int, null_type,
  
 const int N=1e6+5;
 const int mod = 1e9+7;
+
+vector<vector<bool>> vis;
+vector<pair<int, int>> moves = {{-1,0},{1,0},{0,-1},{0,1}};
+int n,m,res;
+
+//helper function - to check if a particular cell is not out of bounds
+bool isValid(int x, int y){
+    if(x < 0 || x>=n || y< 0 || y >= m ) return false;
+    if (vis[x][y]) return false;
+    return true;
+}
+
+void dfs(int x, int y){
+	vis[x][y] = true;
+	for(auto it: moves )
+		if(isValid(x+it.first, y+it.second))
+			dfs(x+it.first, y+it.second);
+}
+
+void connected_components(){
+	for(int i=0; i<n; i++){
+		for(int j =0; j<m; j++){
+			if(!vis[i][j]){
+				dfs(i,j);
+				res++;
+			}
+		}
+	}
+}
  
 int main()
 {
