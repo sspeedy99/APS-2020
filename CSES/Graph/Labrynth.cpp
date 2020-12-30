@@ -1,6 +1,6 @@
 /* Author - sspeedy99
 Editorial - Simple Solution
-Use the BFS on the grid to find the path between two points - note that, this is not a shortest path problem, hence simple bfs would be enough */
+Minimum number of edges needed will be c-1 where c is the number of connected componets. Also connect the first element of every set of connected componets */
 
 
 #include <bits/stdc++.h>
