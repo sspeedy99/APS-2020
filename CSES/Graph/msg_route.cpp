@@ -1,6 +1,6 @@
 /* Author - sspeedy99
 Editorial - Simple Solution
-The Number of rooms will be the number of connected componets in the grid. They can eaisly be found by applying dfs on the grid */
+The solution is pretty straight forward. We only have to find the shortest path between 1 to n in the given undricted path. Simple BFS is enough, use a vector to print the path */
 
 
 
