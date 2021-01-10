@@ -1,6 +1,6 @@
 /* Author - sspeedy99
 Editorial - Simple Solution
-The solution is pretty straight forward. We only have to find the shortest path between 1 to n in the given undricted path. Simple BFS is enough, use a vector to print the path */
+Cycle detection and cycle retrivel concept - A cycle is detected and retrived when we revisit a non parent neighbou */
 
 
 
@@ -39,6 +39,7 @@ typedef tree<int, null_type,
 #define present(container, element) (container.find(element) != container.end())
 #define notpresent(container, element) (container.find(element) == container.end())
 #define show(container) for(auto it: container) cout<<it<<" "
+
  
  
 const int N=1e6+5;
@@ -46,34 +47,37 @@ const int mod = 1e9+7;
 
 vector<bool> vis;
 vector<vector<int>>graph;
-vector<int>path;
-int n,m;
+vector<int>parent;
+int n,m,start_node, end_node;
 
-void bfs(){
-    queue<int>q;
-    q.push(1);
-    vis[1] = true;
-    while(!q.empty()){
-        int f = q.front();
-        q.pop();
-        for(auto it: graph[f]){
-            if(!vis[it]){
-                q.push(it);
-                vis[it] = true;
-                path[it] = f;
-            }
-        }
-    }
 
-}
 
-void dfs(int u){
+bool dfs(int u, int p){
     vis[u] = true;
-    for(auto it: graph[u])
-        if(!vis[it])
-            dfs(it);
+    parent[u] = p;
+    for(auto v: graph[u]){
+        if(v == p) continue;
+        if(vis[v]){
+            start_node = v;
+            end_node = u;
+            return true;
+        }
+
+        if(!vis[v])
+            if(dfs(v,u))
+                return true;
+    }
+    return false;
 }
 
+bool visit_all(){
+    for(int i=1; i<=n; i++){
+        if(!vis[i])
+            if(dfs(i,-1))
+                return true;
+    }
+    return false;
+}
 
 int main()
 {
@@ -84,6 +88,32 @@ int main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
+    cin>>n>>m;
+    graph.resize(n+1);
+    vis.resize(n+1);
+    parent.resize(n+1);
+    for(int i=0; i<m; i++){
+        int u,v;
+        cin>>u>>v;
+        graph[u].pb(v);
+        graph[v].pb(u);
+    }
+    int ans = visit_all();
+    if(!ans){
+        cout<<"IMPOSSIBLE";
+        return 0;
+    }
+
+    int tv = end_node;
+    vi cycle;
+    cycle.pb(end_node);
+    while(tv != start_node){
+        cycle.pb(parent[tv]);
+        tv = parent[tv];
+    }
+    cycle.pb(end_node);
+    cout<<sz(cycle)<<endl;
+    show(cycle);
     
     return 0;
 }
