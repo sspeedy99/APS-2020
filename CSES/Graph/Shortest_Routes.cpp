@@ -1,6 +1,6 @@
 /* Author - sspeedy99
 Editorial - Simple Solution
-The solution is pretty straight forward. We only have to find the shortest path between 1 to n in the given undricted path. Simple BFS is enough, use a vector to print the path */
+Example of Djikstra's single source shortest path problem */
 
 
 
@@ -39,43 +39,48 @@ typedef tree<int, null_type,
 #define present(container, element) (container.find(element) != container.end())
 #define notpresent(container, element) (container.find(element) == container.end())
 #define show(container) for(auto it: container) cout<<it<<" "
+#define INF 1e17;
+#define int long long int
  
  
 const int N=1e6+5;
 const int mod = 1e9+7;
 
-vector<bool> vis;
-vector<vector<int>>graph;
-vector<int>path;
-int n,m;
 
-void bfs(){
-    queue<int>q;
-    q.push(1);
-    vis[1] = true;
-    while(!q.empty()){
-        int f = q.front();
-        q.pop();
-        for(auto it: graph[f]){
-            if(!vis[it]){
-                q.push(it);
-                vis[it] = true;
-                path[it] = f;
+int n,m;
+vector< vector<pair<int,int>> > graph;
+vector<int>dist;
+
+void djikstra(){
+    //priority queue implementation of min hep
+    priority_queue< pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>> > pq;
+    repi(i,0,n) dist[i] = INF; //initialise all the distance as infinity
+    pq.push({0,1}); // push the source in the priority queue;
+    dist[1] = 0;
+    //djikstra's algo
+    while(!pq.empty()){
+        int u = pq.top().second;
+        int d = pq.top().first;
+        pq.pop();
+        if(dist[u] < d) continue;
+        for(auto e: graph[u]){
+            int v = e.first;
+            int c = e.second;
+            if(dist[v] <= c+d) continue;
+            //edge relaxation d(to) = min(d(to),d(from)+edgeLen)
+            else {
+                dist[v] = c+d;
+                pq.push({dist[v],v});
             }
+
         }
     }
 
 }
 
-void dfs(int u){
-    vis[u] = true;
-    for(auto it: graph[u])
-        if(!vis[it])
-            dfs(it);
-}
 
 
-int main()
+int32_t main()
 {
     // #ifndef ONLINE_JUDGE
     // // For getting input from input.txt file
@@ -84,6 +89,17 @@ int main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
-    
+    cin>>n>>m;
+    graph.resize(n+1);
+    dist.resize(n+1);
+    for(int i=0; i<m; i++){
+        int u,v,c;
+        cin>>u>>v>>c;
+        graph[u].pb({v,c});
+    }
+
+    djikstra();
+    repi(i,1,n) cout<<dist[i]<<" ";
+
     return 0;
 }
