@@ -1,6 +1,6 @@
 /* Author - sspeedy99
 Editorial - Simple Solution
-The solution is pretty straight forward. We only have to find the shortest path between 1 to n in the given undricted path. Simple BFS is enough, use a vector to print the path */
+The Sloution requires Kahn's algorithm to solve the topological sort order in the graph */
 
 
 
@@ -39,43 +39,49 @@ typedef tree<int, null_type,
 #define present(container, element) (container.find(element) != container.end())
 #define notpresent(container, element) (container.find(element) == container.end())
 #define show(container) for(auto it: container) cout<<it<<" "
+#define int long long int
  
  
 const int N=1e6+5;
 const int mod = 1e9+7;
 
-vector<bool> vis;
+vector<int>indegree;
 vector<vector<int>>graph;
-vector<int>path;
+vector<int>top_order;
 int n,m;
 
-void bfs(){
+void topoSort(){
+    for(int i=1; i<=n; i++)
+        for(auto u: graph[i])
+            indegree[u]++;
+        
+    
+    int cnt = 0;
     queue<int>q;
-    q.push(1);
-    vis[1] = true;
+    for(int i=1; i<=n; i++)
+        if(indegree[i] == 0)
+            q.push(i);
+
     while(!q.empty()){
-        int f = q.front();
+        int u = q.front();
         q.pop();
-        for(auto it: graph[f]){
-            if(!vis[it]){
+        top_order.pb(u);
+        for(auto it: graph[u])
+            if(--indegree[it] == 0)
                 q.push(it);
-                vis[it] = true;
-                path[it] = f;
-            }
-        }
+        
+        cnt++;
+
     }
-
-}
-
-void dfs(int u){
-    vis[u] = true;
-    for(auto it: graph[u])
-        if(!vis[it])
-            dfs(it);
+    if(cnt != n) cout<<"IMPOSSIBLE"<<endl;
+    else
+        show(top_order);
+    
+    
 }
 
 
-int main()
+int32_t main()
 {
     // #ifndef ONLINE_JUDGE
     // // For getting input from input.txt file
@@ -84,6 +90,17 @@ int main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
+    cin>>n>>m;
+    graph.resize(n+1);
+    indegree.resize(n+1,0);
+    for(int i=0; i<m; i++){
+        int u,v;
+        cin>>u>>v;
+        graph[u].pb(v);
+    }
+
+    topoSort();
+
     
     return 0;
 }
