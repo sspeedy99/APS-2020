@@ -45,6 +45,20 @@ const int N=1e6+5;
 const int mod = 1e9+7;
 const ll mex = 2e5 + 5;
 
+vector<ll> BIT(mex), inp;
+ll n,q;
+
+void upd(int i, int v){
+    for(; i <=n; i+=i&(-i)) BIT[i]+=v;
+}
+
+ll qry(int i){
+    ll sum = 0;
+    for(;i>0; i-=i&(-i)) sum+=BIT[i];
+    return sum;
+}
+
+
 
 
 int main()

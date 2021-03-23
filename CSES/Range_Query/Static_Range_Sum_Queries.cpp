@@ -2,9 +2,6 @@
 Editorial: Use BIT for range sum
 */
 
-
-
-
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp> // Common file
 #include <ext/pb_ds/tree_policy.hpp>
@@ -43,8 +40,20 @@ typedef tree<int, null_type,
  
 const int N=1e6+5;
 const int mod = 1e9+7;
-const ll mex = 2e5 + 5;
+const int mex = 2e5 + 5;
 
+vector<ll> BIT(mex), inp(mex);
+int n,q;
+
+void upd(int i, ll v){
+    for(; i <=n; i+=i&(-i)) BIT[i]+=v;
+}
+
+ll qry(int i){
+    ll sum = 0;
+    for(;i>0; i-=i&(-i)) sum+=BIT[i];
+    return sum;
+}
 
 
 int main()
@@ -56,6 +65,17 @@ int main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
-    
+    cin>>n>>q;
+    vector<ll>inp(n+1);
+    for(int i=1;i<=n; i++){
+        cin>>inp[i];
+        upd(i,inp[i]);
+    }
+    while(q--){
+        int a,b;
+        cin>>a>>b;
+        cout<<qry(b) - qry(a-1)<<endl;
+    }
+
     return 0;
 }

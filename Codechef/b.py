@@ -1,7 +1,6 @@
 for _ in range(int(input())):
-	inp= list(map(int, input().split()))
-	n,k = inp[0], inp[1]
-
-	inp = sum([int(x) for x in input().split()])
-	print(inp%k)
-
+	n,m,k = map(int,input().split())
+	ans = 0
+	for i in range((k+2),(k+n+m+1)):
+		ans = ans ^ i
+	print(ans)
