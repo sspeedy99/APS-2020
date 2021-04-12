@@ -1,9 +1,5 @@
 /* Author - sspeedy99
-Editorial: Use BIT for range sum
 */
-
-
-
 
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp> // Common file
@@ -46,7 +42,8 @@ const int N=1e6+5;
 const int mod = 1e9+7;
 const ll mex = 2e5 + 5;
 
-
+vector<int> vals = {16,32,44,55};
+vector<int> preVals = {20,36,51,60};
 
 int32_t main()
 {
@@ -58,32 +55,13 @@ int32_t main()
     // freopen("output.txt", "w", stdout);
     IOS;
     int t;
-    cin>>t;
+    cin>>t;rm
     while(t--){
-        int n,m;
-        cin>>n>>m;
-        vi F(n),C(m);
-        rep(i,n) cin>>F[i];
-        rep(j,m) cin>>C[j];
-        bool ch = 0; // 0 for football, 1 for cricket
-        int ans = 1,i = 0, j = 0;
-        while(i<n and j<m){
-            if(C[j] < F[i]){
-                if(ch == 0){
-                    ch = 1;
-                    ans++;
-                }
-                j++;
-            }
-            else{
-                if(ch == 1){
-                ch = 0;
-                ans++;
-                }
-                i++;
-            }
-        }
-        cout<<ans<<endl;
+        int n;
+        cin>>n;
+        if(n<=4) cout<<preVals[n-1]<<endl;
+        else cout<<((int)(n/4))*44 + vals[n%4]<<endl;
+
     }
     return 0;
 }

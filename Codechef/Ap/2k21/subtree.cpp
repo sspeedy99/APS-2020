@@ -1,8 +1,6 @@
 /* Author - sspeedy99
-Editorial: Use BIT for range sum
-*/
-
-
+Editorial - Simple Solution
+Simple solution - Classical problem of disjoint set union */
 
 
 #include <bits/stdc++.h>
@@ -44,9 +42,22 @@ typedef tree<int, null_type,
  
 const int N=1e6+5;
 const int mod = 1e9+7;
-const ll mex = 2e5 + 5;
 
-
+struct DSU {
+	vector<int> e;
+	void init (int n) { e = vector<int> (n, -1); }
+	int get (int x) { return (e[x] < 0 ? x : e[x] = get(e[x])); }
+	bool sameSet (int x, int y) { return get(x) == get(y); }
+	int size (int x) { return -e[get(x)]; }
+	bool unite (int x, int y) {
+		x = get(x), y = get(y);
+		if (x == y) return 0;
+		if (e[x] > e[y]) swap(x, y);
+		e[x] += e[y];
+		e[y] = x;
+		return 1;
+	}
+};  
 
 int32_t main()
 {
@@ -57,33 +68,22 @@ int32_t main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
-    int t;
-    cin>>t;
-    while(t--){
-        int n,m;
-        cin>>n>>m;
-        vi F(n),C(m);
-        rep(i,n) cin>>F[i];
-        rep(j,m) cin>>C[j];
-        bool ch = 0; // 0 for football, 1 for cricket
-        int ans = 1,i = 0, j = 0;
-        while(i<n and j<m){
-            if(C[j] < F[i]){
-                if(ch == 0){
-                    ch = 1;
-                    ans++;
-                }
-                j++;
-            }
-            else{
-                if(ch == 1){
-                ch = 0;
-                ans++;
-                }
-                i++;
-            }
+    int n,m;
+    cin>>n>>m;
+    DSU d;
+    d.init(n);
+    int cc = n, total = 1;
+    int u,v;
+    while(m--){
+        cin>>u>>v;
+        u--,v--;
+        if(d.unite(u,v)){
+            total = max(total,d.size(u));
+            cc--;
         }
-        cout<<ans<<endl;
+        cout<<cc<<" "<<total<<endl;
     }
+
+
     return 0;
 }

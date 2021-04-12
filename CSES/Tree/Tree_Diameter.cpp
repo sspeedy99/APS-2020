@@ -1,9 +1,6 @@
 /* Author - sspeedy99
-Editorial: Use BIT for range sum
+Editorial: Important question - find the diameter in the tree
 */
-
-
-
 
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp> // Common file
@@ -46,6 +43,26 @@ const int N=1e6+5;
 const int mod = 1e9+7;
 const ll mex = 2e5 + 5;
 
+vector<vector<int>>children; // to store the children of every node. children[parent_node] -> child_node1, child_node2
+vector<int>F, G; // subtree[node] -> size of subtree whose root is node, depth[node] -> depth of node 
+int diameter;
+
+void solve(int V, int parent){
+    vector<int>fValues;
+    for(auto v: children[V]){
+        if(v==parent) continue;
+        solve(v,V);
+        fValues.pb(F[v]);
+    }
+
+    sort(all(fValues));
+    F[V] = 1;
+    if(not fValues.empty()) F[V] += fValues.back();
+    if(fValues.size() >= 2)
+        G[V] = 2 + fValues.back() + fValues[fValues.size() - 2];
+    
+    diameter = max(diameter,max(F[V], G[V]));
+}
 
 
 int32_t main()
@@ -57,33 +74,18 @@ int32_t main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
-    int t;
-    cin>>t;
-    while(t--){
-        int n,m;
-        cin>>n>>m;
-        vi F(n),C(m);
-        rep(i,n) cin>>F[i];
-        rep(j,m) cin>>C[j];
-        bool ch = 0; // 0 for football, 1 for cricket
-        int ans = 1,i = 0, j = 0;
-        while(i<n and j<m){
-            if(C[j] < F[i]){
-                if(ch == 0){
-                    ch = 1;
-                    ans++;
-                }
-                j++;
-            }
-            else{
-                if(ch == 1){
-                ch = 0;
-                ans++;
-                }
-                i++;
-            }
-        }
-        cout<<ans<<endl;
+    int n;
+    cin>>n;
+    children.resize(n+1);
+    F.resize(n+1);
+    G.resize(n+1);
+    for(int i=0; i<n-1; i++){
+        int u,v;
+        cin>>u>>v;
+        children[u].pb(v);
     }
+    solve(1,0);
+    cout<<diameter<<endl;
+
     return 0;
 }

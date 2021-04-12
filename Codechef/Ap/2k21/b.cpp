@@ -1,9 +1,5 @@
 /* Author - sspeedy99
-Editorial: Use BIT for range sum
 */
-
-
-
 
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp> // Common file
@@ -39,14 +35,54 @@ typedef tree<int, null_type,
 #define present(container, element) (container.find(element) != container.end())
 #define notpresent(container, element) (container.find(element) == container.end())
 #define show(container) for(auto it: container) cout<<it<<" "
-#define int long long
+#define int long long int
  
  
 const int N=1e6+5;
 const int mod = 1e9+7;
 const ll mex = 2e5 + 5;
 
+vector<vector<int>> mat;
 
+void readInp(int n, int m){
+    mat.resize(n+1);
+    repi(i,0,n) mat[i].resize(m+1);
+    repi(i,0,n)
+        repi(j,0,m)
+            if(i ==0 || j==0) mat[i][j] = 0;
+            else cin>>mat[i][j];
+}
+
+void overRide(int n, int m){
+    repi(i,0,n){
+        int s = 0;
+        repi(j,0,m){
+            mat[i][j] += s;
+            s = mat[i][j];
+        }
+    }
+}
+
+void inverseOverride(int n, int m){
+    repi(j,0,m){
+        int s = 0;
+        repi(i,0,n){
+            mat[i][j] += s;
+            s = mat[i][j];
+        }
+    }
+}
+
+int solve(int n, int m, int k){
+    int u = min(n,m);
+    int ans = 0;
+    repi(v,1,u)
+        repi(i,v,n)
+            repi(j,v,m)
+                if((mat[i][j]+mat[i-v][j-v]-mat[i][j-v]-mat[i-v][j])/(v*v)>=k)
+                    ans += 1;
+    return ans;
+}
 
 int32_t main()
 {
@@ -60,30 +96,14 @@ int32_t main()
     int t;
     cin>>t;
     while(t--){
-        int n,m;
-        cin>>n>>m;
-        vi F(n),C(m);
-        rep(i,n) cin>>F[i];
-        rep(j,m) cin>>C[j];
-        bool ch = 0; // 0 for football, 1 for cricket
-        int ans = 1,i = 0, j = 0;
-        while(i<n and j<m){
-            if(C[j] < F[i]){
-                if(ch == 0){
-                    ch = 1;
-                    ans++;
-                }
-                j++;
-            }
-            else{
-                if(ch == 1){
-                ch = 0;
-                ans++;
-                }
-                i++;
-            }
-        }
+        int n,m,k;cin>>n>>m>>k;
+        readInp(n,m);
+        overRide(n,m);
+        inverseOverride(n,m);
+        int ans = solve(n,m,k);
         cout<<ans<<endl;
+        mat.clear();
+
     }
     return 0;
 }

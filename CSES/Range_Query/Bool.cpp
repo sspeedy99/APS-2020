@@ -2,9 +2,6 @@
 Editorial: Use BIT for range sum
 */
 
-
-
-
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp> // Common file
 #include <ext/pb_ds/tree_policy.hpp>
@@ -39,16 +36,27 @@ typedef tree<int, null_type,
 #define present(container, element) (container.find(element) != container.end())
 #define notpresent(container, element) (container.find(element) == container.end())
 #define show(container) for(auto it: container) cout<<it<<" "
-#define int long long
  
  
 const int N=1e6+5;
 const int mod = 1e9+7;
-const ll mex = 2e5 + 5;
+const int mex = 2e5 + 5;
+
+vector<ll> BIT(mex), inp(mex);
+int n,q;
+
+void upd(int i, ll v){
+    for(; i <=n; i+=i&(-i)) BIT[i]+=v;
+}
+
+ll qry(int i){
+    ll sum = 0;
+    for(;i>0; i-=i&(-i)) sum+=BIT[i];
+    return sum;
+}
 
 
-
-int32_t main()
+int main()
 {
     // #ifndef ONLINE_JUDGE
     // // For getting input from input.txt file
@@ -57,33 +65,22 @@ int32_t main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
-    int t;
-    cin>>t;
+    int t; cin>>t;
     while(t--){
-        int n,m;
-        cin>>n>>m;
-        vi F(n),C(m);
-        rep(i,n) cin>>F[i];
-        rep(j,m) cin>>C[j];
-        bool ch = 0; // 0 for football, 1 for cricket
-        int ans = 1,i = 0, j = 0;
-        while(i<n and j<m){
-            if(C[j] < F[i]){
-                if(ch == 0){
-                    ch = 1;
-                    ans++;
-                }
-                j++;
-            }
-            else{
-                if(ch == 1){
-                ch = 0;
-                ans++;
-                }
-                i++;
-            }
-        }
-        cout<<ans<<endl;
+    int n,m,k;
+    cin>>n>>m>>k;
+    vector<ll>scores(n+1);
+    for(int i=1;i<=n; i++){
+        cin>>scores[i];
+        upd(i,0);
     }
+    while(q--){
+        int a,b;
+        cin>>a>>b;
+        cout<<qry(b) - qry(a-1)<<endl;
+    }
+    }
+
+
     return 0;
 }
