@@ -1,39 +1,36 @@
-import sys
+t=int(input())
 
-def check():
-    print(sys.base_prefix)
+def solve(inp,n,a):
 
-for _ in range(int(input())):
-    n,m,k = map(int,input().split(" "))
-    mat = []
-    u = min(n,m)
-    ans = 0
-    for i in range(0,n): 
-        mat.append([int(j) for j in input().split()])
-
-    for i in range(0,n):
-        for j in range(0,m):
-            if i == 0 or j == 0:
-                mat[i][j] = 0
-    for i in range(0,n):
-        x = 0
-        for j in range(0,m):
-            mat[i][j] += x
-            x = mat[i][j]
-
-    for j in range(0,m):
-        x = 0
-        for i in range(0,n):
-            mat[i][j] += x
-            x = mat[i][j]
-
-    for v in range(1,u+1):
-        for i in range(v,n):
-            for j in range(v,m):
-                if((mat[i][j]+mat[i-v][j-v]-mat[i][j-v]-mat[i-v][j]//(v*v)>=k)):
-                    ans += 1
-    
-    print(ans)
-
-    
-    
+for i in range(t):
+    a=[0 for i in range(31)]
+        n,q=map(int,input().split())
+        l=list(map(int,input().split()))
+        for i in range(n):
+            for j in range(31):
+                x=1<<j
+                if l[i]&x:
+                    a[j]+=1
+        ans=0
+        for i in range(31):
+            x=1<<i
+            if a[i]:
+                ans+=x
+        print(ans)
+        for k in range(q):
+            idx,val=map(int,input().split())
+            for i in range(31):
+                x=1<<i
+                if l[idx-1]&x:
+                    a[i]-=1
+            for i in range(31):
+                x=1<<i
+                if val&x:
+                    a[i]+=1
+            l[idx-1]=val
+            ans=0
+            for i in range(31):
+                x=1<<i
+                if a[i]>0:
+                    ans+=x
+        print(ans)
