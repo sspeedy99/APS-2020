@@ -31,14 +31,29 @@ typedef tree<int, null_type,
 #define repi(i, x, n) for (auto i = x; i <= n; ++i)
 #define present(container, element) (container.find(element) != container.end())
 #define notpresent(container, element) (container.find(element) == container.end())
- 
+#define int long long int
  
 const int N=1e6+5;
 const int mod = 1e9+7;
-
+vector<int>moves;
+vector<int>dp;
+int n,k;
+int solve(){
+    for(int i=0; i<=k; i++){
+            for(int j = 0; j<n; j++){
+                if(moves[j] <= i){
+                    if(!dp[i-moves[j]]){
+                        dp[i] = 1;
+                        break;
+                    }
+                }
+            }
+    }
+    return dp[k];
+}
 
  
-int main()
+int32_t main()
 {
     // #ifndef ONLINE_JUDGE
     // // For getting input from input.txt file
@@ -47,5 +62,12 @@ int main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
+    cin>>n>>k;
+    moves.resize(n);
+    dp.resize(k+1,0);
+    rep(i,n) cin>>moves[i];
+    int ans = solve();
+    if(ans == 1) cout<<"First"<<endl;
+    else cout<<"Second"<<endl;
     return 0;
 }
