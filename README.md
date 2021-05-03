@@ -23,3 +23,7 @@ Repository of the Course APS-2020
 * Eulerian path and circuit.
 * Hamiltonian path and circuit. 
 * Graph Coloring - Bipartite check and 4 color theorem based problems.
+
+### Important DP concepts
+* Seletion problems, i.e, selecting one and leaving another. Ex - Choosing the Judge(Hackerearth), Boredom(Codeforces)
+* DP on strings - Usually we create 2D dp for such problems. 
