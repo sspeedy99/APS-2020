@@ -9,3 +9,5 @@ Repository of the Course APS-2020
 * Finding K shortest Routes in a graph problem - Modified Dijikstra
 * Classical Problems of DP - LPS
 * Longest Flight Route - DP on Graphs (Topo sort with DP)
+### Important Graph Algorithms -
+* BFS
