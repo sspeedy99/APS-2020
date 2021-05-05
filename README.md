@@ -26,4 +26,5 @@ Repository of the Course APS-2020
 
 ### Important DP concepts
 * Seletion problems, i.e, selecting one and leaving another. Ex - Choosing the Judge(Hackerearth), Boredom(Codeforces)
+* 2D DP problems -> where state change is dependent on two variables Ex - Vacation(Codeforces)
 * DP on strings - Usually we create 2D dp for such problems. 
