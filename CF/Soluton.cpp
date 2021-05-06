@@ -23,7 +23,7 @@ typedef tree<int, null_type,
 #define ll long long
 #define fi first
 #define se second
-#define sz(x) (int)((x).sizmedian = *prev(s.find_by_order(k/2));e())
+#define sz(x) (int)((x).size())
 #define fill(x, y) memset(x, y, sizeof(y))
 #define all(x) (x).begin(), (x).end()
 #define trace(itr, x)  for (auto itr : x)
@@ -34,7 +34,9 @@ typedef tree<int, null_type,
 
 
 const int N=1e5+5;
-
+int n;
+void f(n)
+bool f(char*s){s=!s[strspn(s,s+strlen(s)-1)];}
 
 int main()
 {
@@ -45,21 +47,15 @@ int main()
     // // Printing the Output to output.txt file 
     // freopen("output.txt", "w", stdout); 
     IOS;
-    int n;
-    cin>>n;
-    vi inp(n);
-    for(int i=1; i<=n; ++i) cin>>inp[i];
-    sort(all(inp));
-    vi even,odd;
-    for(int i=1; i<n; i+=2){
-        odd.pb(inp[i]);
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+	    for(int i = 1; i < n; i++)
+		f(n) && printf("%u\n", n);
+}
     }
-    for(int i=2; i<n; i+=2){
-        even.pb(inp[i]);
-    }
-    cout<<endl;
-    
-    // #endif 
     return 0;
 }
 

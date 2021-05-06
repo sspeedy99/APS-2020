@@ -35,22 +35,21 @@ typedef tree<int, null_type,
 
 const int N=1e5+5;
 
+string s;
 
-int solve(vector<int> b, vector<int> g, int n, int m){
-    int cnt =0;
-    for(int i=0; i<n; i++){
-        for(int j=0; j<m; j++){
-            if(abs(b[i] - g[j]) <= 1){
-                g[j] = N;
-                cnt++;
-                break;
-            }
-        }
+bool check(int k){
+    int arr[4] = {0};
+    for(int i=0; i<k-1; i++){
+        int idx = s[i] - '0';
+        arr[idx]++;
     }
-
-    return cnt;
+    for(int i=k-1; i<s.size(); i++){
+        if(arr[1] > 0 && arr[2] > 0 && arr[3] > 0) return true;
+        int idx = s[i-k+1] - '0';
+        arr[idx]--;
+    }
+    return false;
 }
-
 
 int main()
 {
@@ -61,16 +60,17 @@ int main()
     // // Printing the Output to output.txt file 
     // freopen("output.txt", "w", stdout); 
     IOS;
-    int n,m;
-    cin>>n;
-    vi boys(n);
-    rep(i,n) cin>>boys[i];
-    cin>>m;
-    vi girls(m);
-    rep(j,m) cin>>girls[j];
-
-    sort(all(boys));
-    sort(all(girls));
-    cout<<solve(boys,girls,n,m)<<endl;
+    int t; cin>>t;
+    while(t--){
+        cin>>s;
+        int low = 3, high = s.size(), ans = INT_MAX;
+        while(low <= high){
+            int mid = (low+high)/2;
+            if(check(mid)) ans = min(ans, mid),high = mid - 1;
+            else low = mid + 1;
+        }
+        if (ans == INT_MAX) cout<<"0"<<endl;
+        else cout<<ans<<endl;
+    }
     return 0;
 }
