@@ -29,4 +29,5 @@ Repository of the Course APS-2020
 * 2D DP problems -> where state change is dependent on two variables Ex - Vacation(Codeforces)
 * DP on strings - Usually we create 2D dp for such problems. 
 * Minimax Algorthim problems
+* Bitmask dp - used in assignment problems
 
