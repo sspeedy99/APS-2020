@@ -32,11 +32,9 @@ typedef tree<int, null_type,
 #define present(container, element) (container.find(element) != container.end())
 #define notpresent(container, element) (container.find(element) == container.end())
 
+const ll mod = 1e9+7;
+vector<priority_queue<pair<int,int>> > graph;
 
-const int N=1e5+5;
-int n;
-void f(n)
-bool f(char*s){s=!s[strspn(s,s+strlen(s)-1)];}
 
 int main()
 {
@@ -50,11 +48,19 @@ int main()
     int t;
     cin>>t;
     while(t--){
-        int n;
+        ll n;
         cin>>n;
-	    for(int i = 1; i < n; i++)
-		f(n) && printf("%u\n", n);
-}
+        graph.resize(n+1);
+        for(int i=0; i<n-1; i++){
+            int u,v;
+            cin>>u>>v;
+            graph[u].push({v,sz(graph[v])});
+        }
+        for(auto it: graph){
+            
+        }
+
+
     }
     return 0;
 }

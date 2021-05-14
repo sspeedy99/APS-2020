@@ -35,7 +35,7 @@ typedef tree<int, null_type,
  
 const int N=1e6+5;
 const int mod = 1e9+7;
-
+const ll inf = 1e18;
 
  
 int main()
