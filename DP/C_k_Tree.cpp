@@ -37,19 +37,11 @@ const int N=1e5+5;
 const int mod = 1e9+7;
 const ll inf = 1e18;
 
-int dp[N];
-vector<vector<int>>edge;
+void modular_add(int &a, int b){
+    a += b;
+    if(a >= mod) a -= mod;
+}
 
-void dfs(int src, int parent){
-    //dp[v][0] - no of ways tree can be colored if the selected node is colored white
-    //dp[v][1] - no of ways tree can be colored if the selected node is colored black
-    dp[src] = 1;
-    for(auto child : edge[src]){
-        if(child == parent) continue;
-        dfs(child,src);
-        dp[src] = dp[src] * dp[child] % mod;
-    }
-} 
 
 int main()
 {
@@ -60,17 +52,24 @@ int main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
-    int n;
-    cin>>n;
-    edge.resize(n+1);
-    for(int i=0; i<n-1; i++){
-        int u,v;
-        cin>>u>>v;
-        edge[u].push_back(v);
-        edge[v].push_back(u);
+    int n,k,d;
+    cin>>n>>k>>d;
+    int dp[n+1][2];
+    fill(dp,0);
+    dp[0][0] = 1;
+    for(int i=1; i<=n; i++){
+        for(int j=1; j<=k; j++){
+            if(i<j) break;
+            if(j<d){
+                modular_add(dp[i][0],dp[i-j][0]);
+                modular_add(dp[i][1],dp[i-j][1]);
+            }
+            else{
+                modular_add(dp[i][1],dp[i-j][0]);
+                modular_add(dp[i][1],dp[i-j][1]);                
+            }
+        }
     }
-    dfs(1,-1);
-    //answer will be no of ways the node can be colored either black and white
-    cout<<(dp[1])%mod;
+    cout<<dp[n][1]<<endl;
     return 0;
 }
