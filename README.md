@@ -30,4 +30,5 @@ Repository of the Course APS-2020
 * DP on strings - Usually we create 2D dp for such problems. 
 * Minimax Algorthim problems
 * Bitmask dp - used in assignment problems
+* DP on trees - Diameter of a tree, no of paths of lenght k in a tree
 
