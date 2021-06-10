@@ -31,4 +31,5 @@ Repository of the Course APS-2020
 * Minimax Algorthim problems
 * Bitmask dp - used in assignment problems
 * DP on trees - Diameter of a tree, no of paths of lenght k in a tree
+* DP on trees - Uniqe structred BST for given N (print the trees and the numbers too) - numbers can be found using catalan's number.
 
