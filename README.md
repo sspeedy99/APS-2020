@@ -33,4 +33,5 @@ Repository of the Course APS-2020
 * DP on trees - Diameter of a tree, no of paths of lenght k in a tree
 * DP on trees - Uniqe structred BST for given N (print the trees and the numbers too) - numbers can be found using catalan's number.
 * DP - Maximize profit by selling stocks with at most k transtaction
+* Dp - Tries and DP - Word Break II
 
