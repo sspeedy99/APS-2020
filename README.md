@@ -35,5 +35,5 @@ Repository of the Course APS-2020
 * DP - Maximize profit by selling stocks with at most k transtaction
 * Dp - Tries and DP - Word Break II
 * DP - Dungeon Game - backward iteration
-* DP - Cherry Pickup - DP on grids
+* DP - Cherry Pickup - DP on grids - Find the max area square of ones - dp on grids
 
