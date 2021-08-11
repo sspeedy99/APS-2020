@@ -49,30 +49,24 @@ int main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
-    int n,k;
-    cin>>n>>k;
-    vi a(n),t(n);
-    vi pref(n);
+   cout << fixed << setprecision(10);
+	int t;
+	cin >> t;
+	while (t--) {
+		int n;
+		cin >> n;
+		vector<int> v(n);
+		for (int i = 0; i < n; i++)
+			cin >> v[i];
+		int mx = v[0];
+		long long sum = 0;
+		for (int i = 0; i < n; i++) {
+			if (v[i] > mx)
+				mx = v[i];
+			sum += v[i];
+		}
+		cout << 1.0 * (sum - mx) / (n - 1) + mx << endl;
+	}
 
-    for(int i=0; i<n; i++) cin>>a[i];
-    for(int i=0; i<n; i++) cin>>t[i];
-
-    int ans = 0,add = 0;
-    for(int i=0; i<n; i++){
-        if(t[i] == 1) {
-            ans += a[i];
-            a[i] = 0;
-        }
-    }
-
-    pref[0] = a[0];
-    for(int i=1; i<n; i++)
-        pref[i] = pref[i-1] + a[i];
-    
-    for (int i = k - 1; i < n; ++i)
-		add = max(add, pref[i] - (i >= k ? pref[i - k] : 0));
-    
-    ans += add;
-    cout<<ans<<endl;
     return 0;
 }

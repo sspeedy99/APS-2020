@@ -49,30 +49,30 @@ int main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
-    int n,k;
-    cin>>n>>k;
-    vi a(n),t(n);
-    vi pref(n);
-
-    for(int i=0; i<n; i++) cin>>a[i];
-    for(int i=0; i<n; i++) cin>>t[i];
-
-    int ans = 0,add = 0;
-    for(int i=0; i<n; i++){
-        if(t[i] == 1) {
-            ans += a[i];
-            a[i] = 0;
+    int t;
+    cin>>t;
+    while(t--){
+        int n, k;
+        cin>>n>>k;
+        vi inp(n),srt(n);
+        rep(i,n){
+            cin>>inp[i];
+            srt[i] = inp[i];
         }
+        map<int,int>mp;
+        sort(all(srt));
+        rep(i,n)
+            mp[srt[i]] = i;
+        
+        int cnt = 0;
+        rep(i,n){
+            if(mp[inp[i]] > 0 && i > 0 && srt[mp[inp[i]]-1] == inp[i-1])
+                continue;
+            else
+                cnt++;
+        }
+        (cnt<=k)?cout<<"Yes\n":cout<<"No\n";
     }
 
-    pref[0] = a[0];
-    for(int i=1; i<n; i++)
-        pref[i] = pref[i-1] + a[i];
-    
-    for (int i = k - 1; i < n; ++i)
-		add = max(add, pref[i] - (i >= k ? pref[i - k] : 0));
-    
-    ans += add;
-    cout<<ans<<endl;
     return 0;
 }
