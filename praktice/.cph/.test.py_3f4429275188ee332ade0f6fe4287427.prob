@@ -1,0 +1,1 @@
+{"name":"Local: test","url":"/home/shashi/Desktop/College/APS/APS-2020/praktice/test.py","tests":[{"id":1638092863525,"input":"5\n1 1 2 3 5","output":"8"},{"id":1638092912291,"input":"5\n2 4 6 8 10","output":"12"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/shashi/Desktop/College/APS/APS-2020/praktice/test.py","group":"local","local":true}
