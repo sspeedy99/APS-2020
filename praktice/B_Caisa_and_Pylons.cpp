@@ -39,43 +39,7 @@ typedef tree<int, null_type,
 #define present(container, element) (container.find(element) != container.end())
 #define notpresent(container, element) (container.find(element) == container.end())
 #define show(container) for(auto it: container) cout<<it<<" "
-
-ll power(ll a, ll b, ll md) {return (!b ? 1 : (b & 1 ? a * power(a * a % md, b / 2, md) % md : power(a * a % md, b / 2, md) % md));}
  
- 
-const int N=1e6+5;
-const int mod = 1e9+7;
-
-vector<bool> vis;
-vector<vector<int>>graph;
-vector<int>path;
-int n,m;
-
-void bfs(){
-    queue<int>q;
-    q.push(1);
-    vis[1] = true;
-    while(!q.empty()){
-        int f = q.front();
-        q.pop();
-        for(auto it: graph[f]){
-            if(!vis[it]){
-                q.push(it);
-                vis[it] = true;
-                path[it] = f;
-            }
-        }
-    }
-
-}
-
-void dfs(int u){
-    vis[u] = true;
-    for(auto it: graph[u])
-        if(!vis[it])
-            dfs(it);
-}
-
 
 int main()
 {
@@ -86,6 +50,16 @@ int main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
+    int n;
+    cin>>n;
+    vi inp(n);
+    rep(i,n) cin>>inp[i];
+    int net_eneg = 0;
+    for(int i=1; i<n; i++)
+        net_eneg += (inp[i-1] - inp[i]);
+
+    int cost = inp[0] - net_eneg;
+    cout<<cost<<endl;
     
     return 0;
 }

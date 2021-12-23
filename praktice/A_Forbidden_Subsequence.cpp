@@ -46,35 +46,7 @@ ll power(ll a, ll b, ll md) {return (!b ? 1 : (b & 1 ? a * power(a * a % md, b /
 const int N=1e6+5;
 const int mod = 1e9+7;
 
-vector<bool> vis;
-vector<vector<int>>graph;
-vector<int>path;
-int n,m;
-
-void bfs(){
-    queue<int>q;
-    q.push(1);
-    vis[1] = true;
-    while(!q.empty()){
-        int f = q.front();
-        q.pop();
-        for(auto it: graph[f]){
-            if(!vis[it]){
-                q.push(it);
-                vis[it] = true;
-                path[it] = f;
-            }
-        }
-    }
-
-}
-
-void dfs(int u){
-    vis[u] = true;
-    for(auto it: graph[u])
-        if(!vis[it])
-            dfs(it);
-}
+int cnt[27]
 
 
 int main()

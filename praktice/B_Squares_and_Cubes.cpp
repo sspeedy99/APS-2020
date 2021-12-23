@@ -86,6 +86,16 @@ int main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        set<int>ans;
+        for(ll i=1; i*i <=n; i++) ans.insert(i*i);
+        for(ll i=1; i*i*i <=n; i++) ans.insert(i*i*i);
+        cout<<ans.size()<<endl;
+    }
     
     return 0;
 }

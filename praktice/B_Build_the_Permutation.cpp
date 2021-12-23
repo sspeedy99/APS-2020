@@ -86,6 +86,32 @@ int main()
     // // Printing the Output to output.txt file
     // freopen("output.txt", "w", stdout);
     IOS;
+    int t;
+    cin>>t;
+    while(t--){
+        int n,a,b;
+        int cntMx = 0, cntMn = 0;
+        cin>>n>>a>>b;
+        int val = max(a,b);
+        if(n < (2 * val) + 1){
+            cout<<"-1"<<endl;
+        }
+        else{
+            vi maxima, minima;
+            for(int i = n; i>=0; i--){
+                maxima.push_back(i);
+                cntMx++;
+                if(cntMx == a) break;
+            }
+            for(int i = 1; i<=n; i++){
+                minima.push_back(i);
+                cntMn++;
+                if(cntMn == b) break;
+            }
+            for(int i)
+            
+        }
+    }
     
     return 0;
 }
